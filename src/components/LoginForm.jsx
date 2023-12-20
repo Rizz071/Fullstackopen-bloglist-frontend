@@ -1,19 +1,27 @@
-import loginService from "../services/login"
+import loginService from "../services/loginService"
+import blogsService from "../services/blogsService"
 
-const LoginForm = ({ username, setUsername, password, setPasswrod, user, setUser }) => {
+const LoginForm = ({ username, setUsername, password, setPassword, user, setUser, setErrorMessage }) => {
 
     const handleLogin = async (event) => {
         event.preventDefault()
 
         try {
-            const user = await loginService.login({
-                username, password,
-            })
+            const user = await loginService.login({ username, password })
+
+            window.localStorage.setItem(
+                'loggedBlogsAppUser', JSON.stringify(user)
+            )
+
+            blogsService.setToken(user.token)
+
             setUser(user)
+
             setUsername('')
             setPassword('')
         } catch (exception) {
             setErrorMessage('Wrong credentials')
+            console.log(exception)
             setTimeout(() => {
                 setErrorMessage(null)
             }, 5000)
