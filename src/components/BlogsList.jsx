@@ -18,15 +18,27 @@ const BlogsList = ({ setMessage }) => {
     }, [updateFlag])
 
 
+    const container = {
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        width: "50vw",
+        // alignItems: "stretch"
+        // margin: "0 0 0 0",
+        // position: "absolute",
+        // top: "10px"
+    }
+
+
+
     return (
         <>
-            <div>
-                <BlogCreate
-                    setMessage={setMessage}
-                />
-            </div>
-            <div>
-                <h2>Blogs in list</h2>
+            <BlogCreate
+                setMessage={setMessage} setUpdateFlag={setUpdateFlag}
+            />
+            <h2 style={{ textAlign: "center", width: "50vw" }}>Blogs in list</h2>
+            <div style={{ ...container }}>
                 {blogs.map(blog => <Blog key={blog.id} blog={blog} setMessage={setMessage} setUpdateFlag={setUpdateFlag} />)}
             </div>
         </>

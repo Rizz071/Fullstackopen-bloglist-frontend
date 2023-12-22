@@ -1,7 +1,7 @@
 import { useState } from "react"
 import blogsService from "../services/blogsService"
 
-const BlogCreate = ({ setMessage }) => {
+const BlogCreate = ({ setMessage, setUpdateFlag }) => {
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
@@ -11,7 +11,7 @@ const BlogCreate = ({ setMessage }) => {
         event.preventDefault()
 
         try {
-            blogsService.createBlog(title, author, url)
+            blogsService.createBlog(title, author, url, setUpdateFlag)
 
             setTitle('')
             setAuthor('')
@@ -35,45 +35,47 @@ const BlogCreate = ({ setMessage }) => {
                 <caption style={{ textAlign: "left" }}>
                     <h2>Create new blog</h2>
                 </caption>
-                <tr>
-                    <td>
-                        Title
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            value={title}
-                            name="title"
-                            onChange={(event) => setTitle(event.target.value)}
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Author
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            value={author}
-                            name="author"
-                            onChange={(event) => setAuthor(event.target.value)}
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        URL
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            value={url}
-                            name="url"
-                            onChange={(event) => setUrl(event.target.value)}
-                        />
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>
+                            Title
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                value={title}
+                                name="title"
+                                onChange={(event) => setTitle(event.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Author
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                value={author}
+                                name="author"
+                                onChange={(event) => setAuthor(event.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            URL
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                value={url}
+                                name="url"
+                                onChange={(event) => setUrl(event.target.value)}
+                            />
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
 

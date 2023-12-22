@@ -14,7 +14,7 @@ const getAll = async (setUpdateFlag) => {
   return request.data
 }
 
-const createBlog = async (title, author, url) => {
+const createBlog = async (title, author, url, setUpdateFlag) => {
   const request = await axios.post(
     baseUrl,
     {
@@ -28,11 +28,11 @@ const createBlog = async (title, author, url) => {
       'Content-Type': 'application/json'
     }
   )
-
+  setUpdateFlag(Math.random)
   return request.data
 }
 
-const deleteBlog = async (id) => {
+const deleteBlog = async (id, setUpdateFlag) => {
   const request = await axios.delete(
     `${baseUrl}\\${id}`,
     {
@@ -41,6 +41,7 @@ const deleteBlog = async (id) => {
     }
   )
 
+  setUpdateFlag(Math.random)
   return request.data
 }
 
