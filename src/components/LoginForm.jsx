@@ -1,7 +1,7 @@
 import loginService from "../services/loginService"
 import blogsService from "../services/blogsService"
 
-const LoginForm = ({ username, setUsername, password, setPassword, user, setUser, setErrorMessage }) => {
+const LoginForm = ({ username, setUsername, password, setPassword, setUser, setMessage }) => {
 
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -19,12 +19,11 @@ const LoginForm = ({ username, setUsername, password, setPassword, user, setUser
 
             setUsername('')
             setPassword('')
+
         } catch (exception) {
             setErrorMessage('Wrong credentials')
             console.log(exception)
-            setTimeout(() => {
-                setErrorMessage(null)
-            }, 5000)
+            setTimeout(() => { setMessage(null) }, 5000)
         }
     }
 
@@ -32,7 +31,7 @@ const LoginForm = ({ username, setUsername, password, setPassword, user, setUser
     return (
         <form onSubmit={handleLogin} >
             <div>
-                username
+                username&nbsp;
                 <input
                     type="text"
                     value={username}
@@ -41,7 +40,7 @@ const LoginForm = ({ username, setUsername, password, setPassword, user, setUser
                 />
             </div>
             <div>
-                password
+                password&nbsp;
                 <input
                     type="password"
                     value={password}

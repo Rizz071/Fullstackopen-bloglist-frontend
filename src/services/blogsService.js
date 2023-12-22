@@ -9,10 +9,39 @@ const setToken = newToken => {
   console.log('processed token: ', token)
 }
 
-
-const getAll = () => {
-  const request = axios.get(baseUrl, { headers: { Authorization: token } })
-  return request.then(response => response.data)
+const getAll = async (setUpdateFlag) => {
+  const request = await axios.get(baseUrl, { headers: { Authorization: token } })
+  return request.data
 }
 
-export default { getAll, setToken }
+const createBlog = async (title, author, url) => {
+  const request = await axios.post(
+    baseUrl,
+    {
+      'title': title,
+      'author': author,
+      'url': url,
+      'likes': 0
+    },
+    {
+      headers: { Authorization: token },
+      'Content-Type': 'application/json'
+    }
+  )
+
+  return request.data
+}
+
+const deleteBlog = async (id) => {
+  const request = await axios.delete(
+    `${baseUrl}\\${id}`,
+    {
+      headers: { Authorization: token },
+      'Content-Type': 'application/json'
+    }
+  )
+
+  return request.data
+}
+
+export default { getAll, createBlog, deleteBlog, setToken }

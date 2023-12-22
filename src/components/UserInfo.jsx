@@ -1,22 +1,23 @@
 const UserInfo = ({ user, setUser }) => {
 
-    const handleLogout = event => {
+    const handleLogout = () => {
         window.localStorage.removeItem('loggedBlogsAppUser')
         setUser(null)
     }
-
-    let current_username = ''
 
     if (user) {
 
         const inline_style = {
             display: "flex",
-            alignItems: "baseline"
+            alignItems: "baseline",
+            margin: "0 0 0 0",
+            position: "absolute",
+            top: "10px"
         }
 
         return (
             <div style={inline_style} >
-                <p>{current_username} logged in&nbsp;</p>
+                <span><strong>{user.username}</strong> logged in&nbsp;</span>
                 <button onClick={handleLogout}> Logout </button>
             </div >
         )
