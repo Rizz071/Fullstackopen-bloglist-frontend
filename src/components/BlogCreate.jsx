@@ -1,7 +1,7 @@
 import { useState } from "react"
 import blogsService from "../services/blogsService"
 
-const BlogCreate = ({ setMessage, setUpdateFlag }) => {
+const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
@@ -11,6 +11,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag }) => {
         event.preventDefault()
 
         try {
+            newBlogFormRef.current.toggleVisibility()
             blogsService.createBlog(title, author, url, setUpdateFlag)
 
             setTitle('')
@@ -79,7 +80,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag }) => {
             </table>
 
 
-            <button type="submit">Add blog</button>
+            <button style={{ marginTop: "5px" }} type="submit">Add blog</button>
         </form >
     )
 

@@ -21,7 +21,7 @@ const LoginForm = ({ username, setUsername, password, setPassword, setUser, setM
             setPassword('')
 
         } catch (exception) {
-            setErrorMessage('Wrong credentials')
+            setMessage('Wrong credentials')
             console.log(exception)
             setTimeout(() => { setMessage(null) }, 5000)
         }
@@ -30,25 +30,39 @@ const LoginForm = ({ username, setUsername, password, setPassword, setUser, setM
 
     return (
         <form onSubmit={handleLogin} >
-            <div>
-                username&nbsp;
-                <input
-                    type="text"
-                    value={username}
-                    name="Username"
-                    onChange={(event) => setUsername(event.target.value)}
-                />
-            </div>
-            <div>
-                password&nbsp;
-                <input
-                    type="password"
-                    value={password}
-                    name="Password"
-                    onChange={(event) => setPassword(event.target.value)}
-                />
-            </div>
-            <button type="submit">login</button>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            Username
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                value={username}
+                                name="Username"
+                                onChange={(event) => setUsername(event.target.value)}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Password
+                        </td>
+                        <td>
+                            <input
+                                type="password"
+                                value={password}
+                                name="Password"
+                                onChange={(event) => setPassword(event.target.value)}
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button style={{ marginTop: "5px" }} type="submit">Login</button>
         </form >
     )
 }

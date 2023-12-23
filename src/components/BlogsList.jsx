@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import blogsService from "../services/blogsService"
 import BlogCreate from './BlogCreate'
 import Blog from './Blog'
+import Togglable from './Togglable'
 
 const BlogsList = ({ setMessage }) => {
 
     const [blogs, setBlogs] = useState([])
     const [updateFlag, setUpdateFlag] = useState(0)
+    const [blogDetailsVisible, setBlogDetailsVisible] = useState(false)
+
+    const newBlogFormRef = useRef()
 
     useEffect(() => {
         console.log('rendering useEfect in BlogList')
@@ -20,7 +24,7 @@ const BlogsList = ({ setMessage }) => {
 
     const container = {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
         flexDirection: "row",
         flexWrap: "wrap",
         width: "50vw",
@@ -34,12 +38,22 @@ const BlogsList = ({ setMessage }) => {
 
     return (
         <>
-            <BlogCreate
-                setMessage={setMessage} setUpdateFlag={setUpdateFlag}
-            />
+            <Togglable buttonLabel='New blog' ref={newBlogFormRef}>
+                <BlogCreate
+                    setMessage={setMessage} setUpdateFlag={setUpdateFlag} newBlogFormRef={newBlogFormRef}
+                />
+            </Togglable>
+
             <h2 style={{ textAlign: "center", width: "50vw" }}>Blogs in list</h2>
             <div style={{ ...container }}>
-                {blogs.map(blog => <Blog key={blog.id} blog={blog} setMessage={setMessage} setUpdateFlag={setUpdateFlag} />)}
+                {blogs.map(blog =>
+                    <Blog
+                        key={blog.id}
+                        blog={blog}
+                        setMessage={setMessage}
+                        setUpdateFlag={setUpdateFlag}
+                        blogDetailsVisible={blogDetailsVisible}
+                        setBlogDetailsVisible={setBlogDetailsVisible} />)}
             </div>
         </>
     )

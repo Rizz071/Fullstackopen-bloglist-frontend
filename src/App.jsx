@@ -4,6 +4,7 @@ import blogsService from './services/blogsService'
 import BlogsList from './components/BlogsList'
 import Notification from './components/Notification'
 import UserInfo from './components/UserInfo'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -36,14 +37,16 @@ const App = () => {
       <Notification message={message} />
 
       {user === null
-        ? <LoginForm
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-          setUser={setUser}
-          setMessage={setMessage}
-        />
+        ? <Togglable buttonLabel='Login' >
+          <LoginForm
+            username={username}
+            setUsername={setUsername}
+            password={password}
+            setPassword={setPassword}
+            setUser={setUser}
+            setMessage={setMessage}
+          />
+        </Togglable>
         : <BlogsList
           setMessage={setMessage}
         />
