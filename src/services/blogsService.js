@@ -14,14 +14,14 @@ const getAll = async (setUpdateFlag) => {
 
   request.data.sort((a, b) => {
     if (a.likes < b.likes) {
-      return 1;
+      return 1
     }
     if (a.likes > b.likes) {
-      return -1;
+      return -1
     }
 
     // names must be equal
-    return 0;
+    return 0
   })
 
 
@@ -48,7 +48,7 @@ const createBlog = async (title, author, url, setUpdateFlag) => {
 }
 
 const deleteBlog = async (id, setUpdateFlag) => {
-  if (window.confirm("Do you really want to delete blog?")) {
+  if (window.confirm('Do you really want to delete blog?')) {
     const request = await axios.delete(
       `${baseUrl}\\${id}`,
       {

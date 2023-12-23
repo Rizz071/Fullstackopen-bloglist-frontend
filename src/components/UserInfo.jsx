@@ -8,11 +8,11 @@ const UserInfo = ({ user, setUser }) => {
     if (user) {
 
         const inline_style = {
-            display: "flex",
-            alignItems: "baseline",
-            margin: "0 0 0 0",
-            position: "absolute",
-            top: "10px"
+            display: 'flex',
+            alignItems: 'baseline',
+            margin: '0 0 0 0',
+            position: 'absolute',
+            top: '10px'
         }
 
         return (

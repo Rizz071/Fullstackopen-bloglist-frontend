@@ -1,5 +1,6 @@
-import loginService from "../services/loginService"
-import blogsService from "../services/blogsService"
+import loginService from '../services/loginService'
+import blogsService from '../services/blogsService'
+import PropTypes from 'prop-types'
 
 const LoginForm = ({ username, setUsername, password, setPassword, setUser, setMessage }) => {
 
@@ -39,9 +40,9 @@ const LoginForm = ({ username, setUsername, password, setPassword, setUser, setM
                         </td>
                         <td>
                             <input
-                                type="text"
+                                type='text'
                                 value={username}
-                                name="Username"
+                                name='Username'
                                 onChange={(event) => setUsername(event.target.value)}
                             />
                         </td>
@@ -52,9 +53,9 @@ const LoginForm = ({ username, setUsername, password, setPassword, setUser, setM
                         </td>
                         <td>
                             <input
-                                type="password"
+                                type='password'
                                 value={password}
-                                name="Password"
+                                name='Password'
                                 onChange={(event) => setPassword(event.target.value)}
                             />
                         </td>
@@ -62,9 +63,19 @@ const LoginForm = ({ username, setUsername, password, setPassword, setUser, setM
                 </tbody>
             </table>
 
-            <button style={{ marginTop: "5px" }} type="submit">Login</button>
+            <button style={{ marginTop: '5px' }} type='submit'>Login</button>
         </form >
     )
 }
+
+LoginForm.propTypes = {
+    username: PropTypes.string.isRequired,
+    setUsername: PropTypes.func.isRequired,
+    password: PropTypes.string.isRequired,
+    setPassword: PropTypes.func.isRequired,
+    setUser: PropTypes.func.isRequired,
+    setMessage: PropTypes.func.isRequired
+}
+
 
 export default LoginForm

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import blogsService from "../services/blogsService"
+import blogsService from '../services/blogsService'
 import BlogCreate from './BlogCreate'
 import Blog from './Blog'
 import Togglable from './Togglable'
@@ -23,15 +23,15 @@ const BlogsList = ({ setMessage }) => {
 
 
     const container = {
-        display: "flex",
-        justifyContent: "flex-start",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        width: "50vw",
-        // alignItems: "stretch"
-        // margin: "0 0 0 0",
-        // position: "absolute",
-        // top: "10px"
+        display: 'flex',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        width: '50vw',
+        // alignItems: 'stretch'
+        // margin: '0 0 0 0',
+        // position: 'absolute',
+        // top: '10px'
     }
 
 
@@ -44,7 +44,7 @@ const BlogsList = ({ setMessage }) => {
                 />
             </Togglable>
 
-            <h2 style={{ textAlign: "center", width: "50vw" }}>Blogs in list</h2>
+            <h2 style={{ textAlign: 'center', width: '50vw' }}>Blogs in list</h2>
             <div style={{ ...container }}>
                 {blogs.map(blog =>
                     <Blog

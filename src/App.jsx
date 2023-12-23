@@ -32,7 +32,7 @@ const App = () => {
         setUser={setUser}
       />
 
-      <h1 style={{ marginTop: "50px" }}>BLOGS Application</h1>
+      <h1 style={{ marginTop: '50px' }}>BLOGS Application</h1>
 
       <Notification message={message} />
 

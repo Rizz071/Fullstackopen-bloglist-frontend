@@ -1,7 +1,7 @@
 const Notification = ({ message }) => {
 
     return (
-        <div style={{ height: "30px" }}>
+        <div style={{ height: '30px' }}>
             <p>{message}</p>
         </div>
     )

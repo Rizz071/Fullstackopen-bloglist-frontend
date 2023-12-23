@@ -1,5 +1,5 @@
-import { useState } from "react"
-import blogsService from "../services/blogsService"
+import { useState } from 'react'
+import blogsService from '../services/blogsService'
 
 const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
 
@@ -33,7 +33,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
     return (
         <form onSubmit={handleCreateBlog} >
             <table>
-                <caption style={{ textAlign: "left" }}>
+                <caption style={{ textAlign: 'left' }}>
                     <h2>Create new blog</h2>
                 </caption>
                 <tbody>
@@ -43,9 +43,9 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
                         </td>
                         <td>
                             <input
-                                type="text"
+                                type='text'
                                 value={title}
-                                name="title"
+                                name='title'
                                 onChange={(event) => setTitle(event.target.value)}
                             />
                         </td>
@@ -56,9 +56,9 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
                         </td>
                         <td>
                             <input
-                                type="text"
+                                type='text'
                                 value={author}
-                                name="author"
+                                name='author'
                                 onChange={(event) => setAuthor(event.target.value)}
                             />
                         </td>
@@ -69,9 +69,9 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
                         </td>
                         <td>
                             <input
-                                type="text"
+                                type='text'
                                 value={url}
-                                name="url"
+                                name='url'
                                 onChange={(event) => setUrl(event.target.value)}
                             />
                         </td>
@@ -80,7 +80,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
             </table>
 
 
-            <button style={{ marginTop: "5px" }} type="submit">Add blog</button>
+            <button style={{ marginTop: '5px' }} type='submit'>Add blog</button>
         </form >
     )
 
