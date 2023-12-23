@@ -13,7 +13,7 @@ const BlogsList = ({ setMessage }) => {
     const newBlogFormRef = useRef()
 
     useEffect(() => {
-        console.log('rendering useEfect in BlogList')
+        // console.log('rendering useEfect in BlogList')
 
         blogsService
             .getAll(setUpdateFlag)
