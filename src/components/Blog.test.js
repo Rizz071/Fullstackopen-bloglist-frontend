@@ -4,10 +4,14 @@ import { render, screen, rerender, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 import blogsService from '../services/blogsService'
+import BlogCreate from './BlogCreate'
 
+//Mocking blogsService.addLike and blogsService.createBlog
+jest.mock('../services/blogsService', () => ({
+    addLike: jest.fn(),
+    createBlog: jest.fn()
+}))
 
-//Mocking blogsService.addLike
-jest.mock('../services/blogsService')
 
 
 //Dummy blog
@@ -20,6 +24,12 @@ const blog = {
         username: 'testuser1'
     }
 }
+
+
+//Clearing mocks between tests with clearAllMocks
+beforeEach(() => {
+    jest.clearAllMocks()
+})
 
 
 test('Component displaying a blog renders the blog\'s title and author, but does not render its URL or number of likes by default', () => {
@@ -102,6 +112,44 @@ test('If the like button is clicked twice, the event handler the component recei
     await user.click(button)
     await user.click(button)
 
-    expect(blogsService.addLike).toBeCalledTimes(2)
+
+    expect(blogsService.addLike.mock.calls).toHaveLength(2)
     expect(mockSetMessage.mock.calls).toHaveLength(2)
+})
+
+
+test('Form calls the event handler it received as props with the right details when a new blog is created', async () => {
+
+    const createBlog = jest.fn()
+    const user = userEvent.setup()
+
+    const dummyRef = {
+        current: {
+            toggleVisibility: function () {
+                return true
+            }
+        }
+    }
+
+    render(<BlogCreate setMessage={() => true} newBlogFormRef={dummyRef} />)
+
+
+    const inputs = screen.getAllByRole('textbox')
+
+    const title = inputs[0]
+    const author = inputs[1]
+    const url = inputs[2]
+
+    const sendButton = screen.getByText('Add blog')
+
+    await user.type(title, 'testing a form...')
+    await user.type(author, 'sample author...')
+    await user.type(url, 'sample url...')
+
+    await user.click(sendButton)
+
+    expect(blogsService.createBlog.mock.calls).toHaveLength(1)
+    expect(blogsService.createBlog.mock.calls[0][0]).toBe('testing a form...')
+    expect(blogsService.createBlog.mock.calls[0][1]).toBe('sample author...')
+    expect(blogsService.createBlog.mock.calls[0][2]).toBe('sample url...')
 })
