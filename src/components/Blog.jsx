@@ -1,21 +1,21 @@
 import blogsService from '../services/blogsService'
 
-const Blog = ({ blog, setMessage, setUpdateFlag, blogDetailsVisible, setBlogDetailsVisible }) => {
+const Blog = ({ user, blog, setMessage, setUpdateFlag, blogDetailsVisible, setBlogDetailsVisible }) => {
 
   const handleDeleteBlog = async () => {
 
     try {
       const result = await blogsService.deleteBlog(blog.id, setUpdateFlag)
 
-      if (result === '204') {
-        setMessage(`blog ${blog.title}\nwas deleted successfully`)
+      if (result === 204) {
+        setMessage(`blog ${blog.title} was deleted successfully`)
         setTimeout(() => { setMessage(null) }, 5000)
       } else {
-        setMessage(`blog ${blog.title}\nwasn't delete`)
+        setMessage(`blog ${blog.title} wasn't delete`)
         setTimeout(() => { setMessage(null) }, 5000)
       }
     } catch (exception) {
-      setMessage(`Deleting blog error\n${exception}`)
+      setMessage(`Deleting blog error ${exception}`)
       setTimeout(() => { setMessage(null) }, 5000)
     }
   }
@@ -70,7 +70,11 @@ const Blog = ({ blog, setMessage, setUpdateFlag, blogDetailsVisible, setBlogDeta
         <br />
         <button className='buttonView' style={toggleVisibilityButton2} onClick={handleViewDetails}>View</button>
         <button className='buttonHide' style={toggleVisibilityButton1} onClick={handleViewDetails}>Hide</button>
-        <button style={{ margin: '0 0 0 3px' }} onClick={handleDeleteBlog}> x </button>
+
+        {user.username === blog.user.username
+          ? <button id='blog-delete-button' style={{ margin: '0 0 0 3px' }} onClick={handleDeleteBlog}> x </button>
+          : false
+        }
       </div>
       <div className='blogHidePart' style={toggleVisibilityButton1}>
         <span className='blog-author'>&nbsp;of {blog.author}</span><br />

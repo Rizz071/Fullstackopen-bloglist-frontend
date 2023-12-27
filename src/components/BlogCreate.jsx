@@ -43,6 +43,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
                         </td>
                         <td>
                             <input
+                                id='title'
                                 type='text'
                                 value={title}
                                 name='title'
@@ -56,6 +57,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
                         </td>
                         <td>
                             <input
+                                id='author'
                                 type='text'
                                 value={author}
                                 name='author'
@@ -69,6 +71,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
                         </td>
                         <td>
                             <input
+                                id='url'
                                 type='text'
                                 value={url}
                                 name='url'
@@ -80,7 +83,7 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
             </table>
 
 
-            <button style={{ marginTop: '5px' }} type='submit'>Add blog</button>
+            <button id='add-blog-button' style={{ marginTop: '5px' }} type='submit'>Add blog</button>
         </form >
     )
 

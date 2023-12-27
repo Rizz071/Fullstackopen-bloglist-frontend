@@ -4,7 +4,7 @@ import BlogCreate from './BlogCreate'
 import Blog from './Blog'
 import Togglable from './Togglable'
 
-const BlogsList = ({ setMessage }) => {
+const BlogsList = ({ user, setMessage }) => {
 
     const [blogs, setBlogs] = useState([])
     const [updateFlag, setUpdateFlag] = useState(0)
@@ -45,9 +45,10 @@ const BlogsList = ({ setMessage }) => {
             </Togglable>
 
             <h2 style={{ textAlign: 'center', width: '50vw' }}>Blogs in list</h2>
-            <div style={{ ...container }}>
+            <div id='blogsListArray' style={{ ...container }}>
                 {blogs.map(blog =>
                     <Blog
+                        user={user}
                         key={blog.id}
                         blog={blog}
                         setMessage={setMessage}

@@ -48,6 +48,7 @@ const App = () => {
           />
         </Togglable>
         : <BlogsList
+          user={user}
           setMessage={setMessage}
         />
       }
