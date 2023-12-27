@@ -63,7 +63,7 @@ const LoginForm = ({ username, setUsername, password, setPassword, setUser, setM
                 </tbody>
             </table>
 
-            <button style={{ marginTop: '5px' }} type='submit'>Login</button>
+            <button id='login-button' style={{ marginTop: '5px' }} type='submit'>Login</button>
         </form >
     )
 }
