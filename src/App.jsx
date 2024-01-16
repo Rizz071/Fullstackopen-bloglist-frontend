@@ -9,18 +9,24 @@ import Notification from './components/Notification'
 import UserInfo from './components/UserInfo'
 import Togglable from './components/Togglable'
 
+import { addSignedInUser } from './reducers/usersReducer'
+import { useDispatch, useSelector } from 'react-redux'
+
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState('')
 
+  const dispatch = useDispatch()
 
   useEffect(() => {
+
     const loggedUserJSON = window.localStorage.getItem('loggedBlogsAppUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
+      dispatch(addSignedInUser(user))
       blogsService.setToken(user.token)
     }
   }, [])
@@ -29,7 +35,6 @@ const App = () => {
 
   return (
     <div>
-
       <UserInfo
         user={user}
         setUser={setUser}

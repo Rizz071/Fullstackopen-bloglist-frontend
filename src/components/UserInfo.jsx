@@ -1,4 +1,7 @@
+import { useSelector } from 'react-redux'
+
 const UserInfo = ({ user, setUser }) => {
+    const loggedUsers = useSelector(state => state.users)
 
     const handleLogout = () => {
         window.localStorage.removeItem('loggedBlogsAppUser')
@@ -7,17 +10,17 @@ const UserInfo = ({ user, setUser }) => {
 
     if (user) {
 
+
         const inline_style = {
             display: 'flex',
             alignItems: 'baseline',
             margin: '0 0 0 0',
-            position: 'absolute',
-            top: '10px'
+
         }
 
         return (
             <div style={inline_style} >
-                <span><strong>{user.username}</strong> logged in&nbsp;</span>
+                <span><strong>{loggedUsers.map(user => user.name)}</strong> logged in&nbsp;</span>
                 <button onClick={handleLogout}> Logout </button>
             </div >
         )

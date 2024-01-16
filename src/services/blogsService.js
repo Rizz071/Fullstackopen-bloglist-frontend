@@ -6,7 +6,7 @@ let token = null
 
 const setToken = newToken => {
   token = `Bearer ${newToken}`
-  console.log('processed token: ', token)
+  // console.log('processed token: ', token)
 }
 
 const getAll = async (setUpdateFlag) => {
