@@ -10,6 +10,8 @@ const setToken = newToken => {
 }
 
 const getAll = async (setUpdateFlag) => {
+
+
   const request = await axios.get(baseUrl, { headers: { Authorization: token } })
 
   request.data.sort((a, b) => {
@@ -25,8 +27,11 @@ const getAll = async (setUpdateFlag) => {
   })
 
 
+
   // console.log(request)
   return request.data
+
+
 }
 
 const createBlog = async (title, author, url, setUpdateFlag) => {

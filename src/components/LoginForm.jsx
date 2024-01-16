@@ -1,8 +1,12 @@
 import loginService from '../services/loginService'
 import blogsService from '../services/blogsService'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { showNotification } from '../reducers/notificationReducer'
 
-const LoginForm = ({ username, setUsername, password, setPassword, setUser, setMessage }) => {
+const LoginForm = ({ username, setUsername, password, setPassword, setUser }) => {
+    const dispatch = useDispatch()
+
 
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -22,9 +26,9 @@ const LoginForm = ({ username, setUsername, password, setPassword, setUser, setM
             setPassword('')
 
         } catch (exception) {
-            setMessage('Wrong credentials')
+
+            dispatch(showNotification('Wrong credentials'))
             console.log(exception)
-            setTimeout(() => { setMessage(null) }, 5000)
         }
     }
 

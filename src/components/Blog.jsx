@@ -1,6 +1,10 @@
 import blogsService from '../services/blogsService'
+import { useDispatch } from 'react-redux'
+import { showNotification } from '../reducers/notificationReducer'
 
-const Blog = ({ user, blog, setMessage, setUpdateFlag, blogDetailsVisible, setBlogDetailsVisible }) => {
+const Blog = ({ user, blog, setUpdateFlag, blogDetailsVisible, setBlogDetailsVisible }) => {
+  const dispatch = useDispatch()
+
 
   const handleDeleteBlog = async () => {
 
@@ -8,15 +12,14 @@ const Blog = ({ user, blog, setMessage, setUpdateFlag, blogDetailsVisible, setBl
       const result = await blogsService.deleteBlog(blog.id, setUpdateFlag)
 
       if (result === 204) {
-        setMessage(`blog ${blog.title} was deleted successfully`)
-        setTimeout(() => { setMessage(null) }, 5000)
+        dispatch(showNotification(`blog ${blog.title} was deleted successfully`))
+
       } else {
-        setMessage(`blog ${blog.title} wasn't delete`)
-        setTimeout(() => { setMessage(null) }, 5000)
+        dispatch(showNotification(`blog ${blog.title} wasn't delete`))
+
       }
     } catch (exception) {
-      setMessage(`Deleting blog error ${exception}`)
-      setTimeout(() => { setMessage(null) }, 5000)
+      dispatch(showNotification(`Deleting blog error ${exception}`))
     }
   }
 
@@ -29,11 +32,9 @@ const Blog = ({ user, blog, setMessage, setUpdateFlag, blogDetailsVisible, setBl
     try {
       await blogsService.addLike(blog, setUpdateFlag)
 
-      setMessage(`Like to blog ${blog.title}\nwas added successfully`)
-      setTimeout(() => { setMessage(null) }, 5000)
+      dispatch(showNotification(`Like to blog ${blog.title}\nwas added successfully`))
     } catch (exception) {
-      setMessage(`Adding like error\n${exception}`)
-      setTimeout(() => { setMessage(null) }, 5000)
+      dispatch(showNotification(`Adding like error\n${exception}`))
     }
   }
 

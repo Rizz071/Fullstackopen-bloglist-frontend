@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import blogsService from '../services/blogsService'
+import { showNotification } from '../reducers/notificationReducer'
 
-const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
+const BlogCreate = ({ setUpdateFlag, newBlogFormRef }) => {
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
+    const dispatch = useDispatch()
+
 
     const handleCreateBlog = event => {
         event.preventDefault()
@@ -18,13 +22,11 @@ const BlogCreate = ({ setMessage, setUpdateFlag, newBlogFormRef }) => {
             setAuthor('')
             setUrl('')
 
-            setMessage(`Blog ${title} was created`)
-            setTimeout(() => { setMessage(null) }, 5000)
+            dispatch(showNotification(`Blog ${title} was created`))
 
         } catch (exception) {
             console.log(exception)
-            setMessage(`Creation blog error\n${exception}`)
-            setTimeout(() => { setMessage(null) }, 5000)
+            dispatch(showNotification(`Creation blog error\n${exception}`))
         }
     }
 

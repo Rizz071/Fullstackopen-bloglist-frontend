@@ -3,21 +3,31 @@ import blogsService from '../services/blogsService'
 import BlogCreate from './BlogCreate'
 import Blog from './Blog'
 import Togglable from './Togglable'
+import { useDispatch } from 'react-redux'
+import { showNotification } from '../reducers/notificationReducer'
 
-const BlogsList = ({ user, setMessage }) => {
+const BlogsList = ({ user }) => {
 
     const [blogs, setBlogs] = useState([])
     const [updateFlag, setUpdateFlag] = useState(0)
     const [blogDetailsVisible, setBlogDetailsVisible] = useState(false)
 
+    const dispatch = useDispatch
+
     const newBlogFormRef = useRef()
 
     useEffect(() => {
-        // console.log('rendering useEfect in BlogList')
 
         blogsService
             .getAll(setUpdateFlag)
             .then(blogs => setBlogs(blogs))
+            .catch(error => {
+                console.log('error catched during fetching blogs from server')
+                console.log(error)
+
+                localStorage.clear()
+            })
+
 
     }, [updateFlag])
 
@@ -40,7 +50,7 @@ const BlogsList = ({ user, setMessage }) => {
         <>
             <Togglable buttonLabel='New blog' ref={newBlogFormRef}>
                 <BlogCreate
-                    setMessage={setMessage} setUpdateFlag={setUpdateFlag} newBlogFormRef={newBlogFormRef}
+                    setUpdateFlag={setUpdateFlag} newBlogFormRef={newBlogFormRef}
                 />
             </Togglable>
 
@@ -51,7 +61,6 @@ const BlogsList = ({ user, setMessage }) => {
                         user={user}
                         key={blog.id}
                         blog={blog}
-                        setMessage={setMessage}
                         setUpdateFlag={setUpdateFlag}
                         blogDetailsVisible={blogDetailsVisible}
                         setBlogDetailsVisible={setBlogDetailsVisible} />)}
