@@ -18,6 +18,7 @@ import {
   Routes, Route, Link
 } from 'react-router-dom'
 import DetailedUserInfo from './components/DetailedUserInfo'
+import DetailedBlogInfo from './components/DetailedBlogInfo'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -36,6 +37,23 @@ const App = () => {
       blogsService.setToken(user.token)
     }
   }, [])
+
+
+  const [updateFlag, setUpdateFlag] = useState(0)
+  const [blogs, setBlogs] = useState([])
+
+  useEffect(() => {
+    blogsService
+      .getAll(setUpdateFlag)
+      .then(blogs => setBlogs(blogs))
+      .catch(error => {
+        console.log('error catched during fetching blogs from server')
+        console.log(error)
+
+        localStorage.clear()
+      })
+  }, [updateFlag])
+
 
   useEffect(() => {
     dispatch(requestUsers())
@@ -57,6 +75,7 @@ const App = () => {
       <Routes>
 
         <Route path="/users/:id" element={<DetailedUserInfo />} />
+        <Route path="/blogs/:id" element={<DetailedBlogInfo blogs={blogs} setUpdateFlag={setUpdateFlag} />} />
 
         <Route path="/" element={
           <>
@@ -76,6 +95,10 @@ const App = () => {
               : <BlogsList
                 user={user}
                 setMessage={setMessage}
+                updateFlag={updateFlag}
+                setUpdateFlag={setUpdateFlag}
+                blogs={blogs}
+                setBlogs={setBlogs}
               />
             }
 

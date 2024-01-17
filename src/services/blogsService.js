@@ -69,7 +69,7 @@ const deleteBlog = async (id, setUpdateFlag) => {
 
 const addLike = async (blog, setUpdateFlag) => {
 
-  const blogObject = blog
+  const blogObject = { ...blog }
   blogObject.likes += 1
 
   const request = await axios.put(

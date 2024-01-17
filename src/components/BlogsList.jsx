@@ -6,30 +6,16 @@ import Togglable from './Togglable'
 import { useDispatch } from 'react-redux'
 import { showNotification } from '../reducers/notificationReducer'
 
-const BlogsList = ({ user }) => {
+const BlogsList = ({ user, updateFlag, setUpdateFlag, blogs, setBlogs }) => {
 
-    const [blogs, setBlogs] = useState([])
-    const [updateFlag, setUpdateFlag] = useState(0)
+
     const [blogDetailsVisible, setBlogDetailsVisible] = useState(false)
 
     const dispatch = useDispatch
 
     const newBlogFormRef = useRef()
 
-    useEffect(() => {
 
-        blogsService
-            .getAll(setUpdateFlag)
-            .then(blogs => setBlogs(blogs))
-            .catch(error => {
-                console.log('error catched during fetching blogs from server')
-                console.log(error)
-
-                localStorage.clear()
-            })
-
-
-    }, [updateFlag])
 
 
     const container = {

@@ -28,7 +28,6 @@ const Blog = ({ user, blog, setUpdateFlag, blogDetailsVisible, setBlogDetailsVis
   }
 
   const handleAddLike = async () => {
-
     try {
       await blogsService.addLike(blog, setUpdateFlag)
 

@@ -23,8 +23,6 @@ export const requestUsers = () => {
     return async dispatch => {
         try {
             const fetchedUsers = await axios.get('http://127.0.0.1:3003/api/users')
-
-            // console.log('users fetched from server: ', fetchedUsers.data)
             dispatch(createUsersList(fetchedUsers.data))
         }
         catch (error) {
