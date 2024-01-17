@@ -13,6 +13,11 @@ import { addSignedInUser } from './reducers/usersReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import UsersList from './components/UsersList'
 import { requestUsers } from './reducers/usersListReducer'
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
+import DetailedUserInfo from './components/DetailedUserInfo'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -23,7 +28,6 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-
     const loggedUserJSON = window.localStorage.getItem('loggedBlogsAppUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -39,7 +43,8 @@ const App = () => {
 
 
   return (
-    <div>
+
+    <Router>
       <UserInfo
         user={user}
         setUser={setUser}
@@ -49,25 +54,67 @@ const App = () => {
 
       <Notification message={message} />
 
-      {user === null
-        ? <Togglable buttonLabel='Login' >
-          <LoginForm
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
-            setUser={setUser}
+      <Routes>
+
+        <Route path="/users/:id" element={<DetailedUserInfo />} />
+
+        <Route path="/" element={
+          <>
+
+
+            {user === null
+              ? <Togglable buttonLabel='Login' >
+                <LoginForm
+                  username={username}
+                  setUsername={setUsername}
+                  password={password}
+                  setPassword={setPassword}
+                  setUser={setUser}
+                  setMessage={setMessage}
+                />
+              </Togglable>
+              : <BlogsList
+                user={user}
+                setMessage={setMessage}
+              />
+            }
+
+            <UsersList />
+          </>
+        } />
+      </Routes>
+
+      {/* <div> */}
+      {/* <UserInfo
+          user={user}
+          setUser={setUser}
+        /> */}
+
+      {/* <h1 style={{ marginTop: '50px' }}>BLOGS Application</h1>
+
+        <Notification message={message} />
+
+        {user === null
+          ? <Togglable buttonLabel='Login' >
+            <LoginForm
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              setUser={setUser}
+              setMessage={setMessage}
+            />
+          </Togglable>
+          : <BlogsList
+            user={user}
             setMessage={setMessage}
           />
-        </Togglable>
-        : <BlogsList
-          user={user}
-          setMessage={setMessage}
-        />
-      }
+        }
 
-      <UsersList />
-    </div>
+        <UsersList /> */}
+      {/* </div> */}
+
+    </Router>
   )
 }
 
