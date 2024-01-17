@@ -11,6 +11,8 @@ import Togglable from './components/Togglable'
 
 import { addSignedInUser } from './reducers/usersReducer'
 import { useDispatch, useSelector } from 'react-redux'
+import UsersList from './components/UsersList'
+import { requestUsers } from './reducers/usersListReducer'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -31,6 +33,9 @@ const App = () => {
     }
   }, [])
 
+  useEffect(() => {
+    dispatch(requestUsers())
+  }, [])
 
 
   return (
@@ -61,6 +66,7 @@ const App = () => {
         />
       }
 
+      <UsersList />
     </div>
   )
 }
