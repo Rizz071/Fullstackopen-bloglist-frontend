@@ -1,8 +1,17 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { requestUsers } from '../reducers/usersListReducer'
 
 
 const UsersList = () => {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(requestUsers())
+    }, [])
+
 
     const usersArray = useSelector(state => state.usersList)
 

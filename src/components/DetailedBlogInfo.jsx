@@ -1,26 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import blogsService from '../services/blogsService'
+// import blogsService from '../services/blogsService'
 import { showNotification } from '../reducers/notificationReducer'
 import { useEffect } from 'react'
+import { addLike } from '../reducers/blogsReducer'
 
 
 
-const DetailedBlogInfo = ({ blogs, setUpdateFlag }) => {
+const DetailedBlogInfo = () => {
 
-    const usersArray = useSelector(state => state.usersList)
+    // const usersArray = useSelector(state => state.usersList)
     const id = useParams().id
-
-
+    const token = useSelector(state => state.sessionUser.convertedToken)
+    const blogs = useSelector(state => state.blogs)
     const blog = blogs.find(blog => blog.id === id)
-    // console.log(blog)
 
     const dispatch = useDispatch()
 
 
     const handleAddLike = async () => {
         try {
-            await blogsService.addLike(blog, setUpdateFlag)
+            dispatch(addLike(token, blog))
 
             dispatch(showNotification(`Like to blog ${blog.title}\nwas added successfully`))
         } catch (exception) {

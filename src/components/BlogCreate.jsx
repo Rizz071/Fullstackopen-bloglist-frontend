@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import blogsService from '../services/blogsService'
+// import blogsService from '../services/blogsService'
 import { showNotification } from '../reducers/notificationReducer'
+import { createBlog } from '../reducers/blogsReducer'
+import { useSelector } from 'react-redux'
 
-const BlogCreate = ({ setUpdateFlag, newBlogFormRef }) => {
+const BlogCreate = ({ newBlogFormRef }) => {
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
     const dispatch = useDispatch()
+
+    const token = useSelector(state => state.sessionUser.convertedToken)
 
 
     const handleCreateBlog = event => {
@@ -16,7 +20,8 @@ const BlogCreate = ({ setUpdateFlag, newBlogFormRef }) => {
 
         try {
             newBlogFormRef.current.toggleVisibility()
-            blogsService.createBlog(title, author, url, setUpdateFlag)
+
+            dispatch(createBlog(token, title, author, url))
 
             setTitle('')
             setAuthor('')

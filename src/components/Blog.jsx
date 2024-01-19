@@ -1,15 +1,18 @@
-import blogsService from '../services/blogsService'
 import { useDispatch } from 'react-redux'
 import { showNotification } from '../reducers/notificationReducer'
+import { deleteBlog, addLike } from '../reducers/blogsReducer'
+import { useSelector } from 'react-redux'
 
 const Blog = ({ user, blog, setUpdateFlag, blogDetailsVisible, setBlogDetailsVisible }) => {
+
   const dispatch = useDispatch()
+  const token = useSelector(state => state.sessionUser.convertedToken)
 
 
   const handleDeleteBlog = async () => {
 
     try {
-      const result = await blogsService.deleteBlog(blog.id, setUpdateFlag)
+      const result = dispatch(deleteBlog(token, blog.id, setUpdateFlag))
 
       if (result === 204) {
         dispatch(showNotification(`blog ${blog.title} was deleted successfully`))
@@ -29,7 +32,7 @@ const Blog = ({ user, blog, setUpdateFlag, blogDetailsVisible, setBlogDetailsVis
 
   const handleAddLike = async () => {
     try {
-      await blogsService.addLike(blog, setUpdateFlag)
+      dispatch(addLike(token, blog))
 
       dispatch(showNotification(`Like to blog ${blog.title}\nwas added successfully`))
     } catch (exception) {

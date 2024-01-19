@@ -8,7 +8,7 @@ const usersListReducer = createSlice({
     initialState,
     reducers: {
         createUsersList(state, action) {
-            return state.concat(action.payload)
+            return action.payload
         }
     },
 })
@@ -18,8 +18,8 @@ const usersListReducer = createSlice({
 
 export const { createUsersList } = usersListReducer.actions
 
-export const requestUsers = () => {
 
+export const requestUsers = () => {
     return async dispatch => {
         try {
             const fetchedUsers = await axios.get('http://127.0.0.1:3003/api/users')

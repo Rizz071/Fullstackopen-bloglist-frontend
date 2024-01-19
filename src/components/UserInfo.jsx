@@ -1,15 +1,17 @@
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { removeSignedInUser } from '../reducers/sessionUserReducer'
 
-const UserInfo = ({ user, setUser }) => {
-    const loggedUsers = useSelector(state => state.users)
+const UserInfo = ({ loggedUser }) => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleLogout = () => {
-        window.localStorage.removeItem('loggedBlogsAppUser')
-        setUser(null)
+        navigate('/')
+        dispatch(removeSignedInUser())
     }
 
-    if (user) {
-
+    if (loggedUser) {
 
         const inline_style = {
             display: 'flex',
@@ -20,7 +22,7 @@ const UserInfo = ({ user, setUser }) => {
 
         return (
             <div style={inline_style} >
-                <span><strong>{loggedUsers.map(user => user.name)}</strong> logged in&nbsp;</span>
+                <span><strong>{loggedUser.name}</strong> logged in&nbsp;</span>
                 <button onClick={handleLogout}> Logout </button>
             </div >
         )
