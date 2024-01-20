@@ -1,15 +1,10 @@
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { showNotification } from '../reducers/notificationReducer'
 import { addLike } from '../reducers/blogsReducer'
 import Comments from './Comments'
-import { useEffect } from 'react'
-import { addSignedInUser, addBearer } from '../reducers/sessionUserReducer'
-
-
 
 const DetailedBlogInfo = () => {
-    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 

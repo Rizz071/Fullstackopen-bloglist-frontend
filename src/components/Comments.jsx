@@ -11,9 +11,6 @@ const Comments = ({ blog }) => {
     const [value, setValue] = useState('')
     const dispatch = useDispatch()
 
-
-
-
     const token = useSelector(state => state.sessionUser.convertedToken)
 
     const comments = useSelector(state => state.comments)
@@ -21,7 +18,7 @@ const Comments = ({ blog }) => {
 
     useEffect(() => {
         dispatch(getComments(blog))
-    }, [dispatch, blog, comments])
+    }, [])
 
     const handleCreateComment = event => {
         event.preventDefault()

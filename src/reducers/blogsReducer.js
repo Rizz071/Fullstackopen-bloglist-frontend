@@ -40,7 +40,7 @@ export const getAll = (token) => {
     return async dispatch => {
         try {
             const request = await axios.get(baseUrl, { headers: { Authorization: token } })
-            // const request = await axios.get(baseUrl)
+
             request.data.sort((a, b) => {
                 if (a.likes < b.likes) {
                     return 1
@@ -58,6 +58,7 @@ export const getAll = (token) => {
         catch (error) {
             console.log('error occured while fetching users from server', error)
             if (error.response.status === 401) localStorage.clear()
+            return error
         }
     }
 }

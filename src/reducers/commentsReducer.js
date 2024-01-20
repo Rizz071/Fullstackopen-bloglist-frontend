@@ -15,7 +15,8 @@ const commentsSlice = createSlice({
         },
         delComment(state, action) {
             return state.filter(comment => {
-                comment.id !== action.payload.commentId
+                // console.log(comment.id, action.payload)
+                return comment.id !== action.payload
             })
         }
     },

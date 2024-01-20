@@ -1,9 +1,14 @@
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import Blog from './Blog'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { requestUsers } from '../reducers/usersListReducer'
 
 const DetailedUserInfo = () => {
+
+
     const usersArray = useSelector(state => state.usersList)
+    console.log(usersArray)
 
     const id = useParams().id
 

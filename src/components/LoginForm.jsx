@@ -10,16 +10,19 @@ const LoginForm = ({ username, setUsername, password, setPassword }) => {
     const handleLogin = async (event) => {
         event.preventDefault()
 
-        try {
-            dispatch(login({ username, password }))
+        const result = await dispatch(login({ username, password }))
 
-            setUsername('')
-            setPassword('')
-        } catch (error) {
 
-            dispatch(showNotification('Wrong credentials'))
-            console.log(error)
+        setUsername('')
+        setPassword('')
+
+        if (result?.response.data.error) {
+            dispatch(showNotification(result.response.data.error))
+            console.log(result)
+            return
         }
+
+        dispatch(showNotification(`Good day, ${username}!`))
     }
 
 

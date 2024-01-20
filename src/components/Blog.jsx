@@ -4,16 +4,15 @@ import { deleteBlog, addLike } from '../reducers/blogsReducer'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const Blog = ({ user, blog, setUpdateFlag, blogDetailsVisible, setBlogDetailsVisible }) => {
+const Blog = ({ blog, blogDetailsVisible, setBlogDetailsVisible }) => {
 
   const dispatch = useDispatch()
   const token = useSelector(state => state.sessionUser.convertedToken)
-
+  const user = useSelector(state => state.sessionUser)
 
   const handleDeleteBlog = async () => {
-
     try {
-      const result = dispatch(deleteBlog(token, blog.id, setUpdateFlag))
+      const result = dispatch(deleteBlog(token, blog.id))
 
       if (result === 204) {
         dispatch(showNotification(`blog ${blog.title} was deleted successfully`))
@@ -66,7 +65,6 @@ const Blog = ({ user, blog, setUpdateFlag, blogDetailsVisible, setBlogDetailsVis
     display: blogDetailsVisible ? 'none' : '',
     margin: '0 0 0 0'
   }
-  //TODO username != id
 
 
   return (
@@ -83,7 +81,7 @@ const Blog = ({ user, blog, setUpdateFlag, blogDetailsVisible, setBlogDetailsVis
         <button className='buttonHide' style={toggleVisibilityButton1} onClick={handleViewDetails}>Hide</button> */}
 
 
-        {user.username === blog.user.username
+        {user.id === blog.user.id
           ? <button id='blog-delete-button' style={{ margin: '0 0 0 3px' }} onClick={handleDeleteBlog}> x </button>
           : false
         }

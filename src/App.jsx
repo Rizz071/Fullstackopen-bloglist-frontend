@@ -13,6 +13,9 @@ import {
 } from 'react-router-dom'
 import DetailedUserInfo from './components/DetailedUserInfo'
 import DetailedBlogInfo from './components/DetailedBlogInfo'
+import NavBar from './components/NavBar'
+import { getAll } from './reducers/blogsReducer'
+import { requestUsers } from './reducers/usersListReducer'
 
 
 const App = () => {
@@ -35,8 +38,10 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+
   return (
     <Router>
+      <NavBar />
       {sessionUser.name && <UserInfo loggedUser={sessionUser} />}
 
       <h1 style={{ marginTop: '50px' }}>BLOGS Application</h1>
@@ -46,6 +51,7 @@ const App = () => {
       <Routes>
 
         <Route path="/users/:id" element={<DetailedUserInfo />} />
+        <Route path="/users/" element={<UsersList />} />
         <Route path="/blogs/:id" element={<DetailedBlogInfo />} />
 
         <Route path="/" element={
@@ -60,8 +66,7 @@ const App = () => {
                 />
               </Togglable>
               : <div>
-                < BlogsList />
-                <UsersList />
+                <BlogsList />
               </div>
             }
           </>

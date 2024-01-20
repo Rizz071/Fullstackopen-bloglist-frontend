@@ -30,13 +30,17 @@ export const login = (credentials) => {
     return async dispatch => {
         const baseUrl = '/api/login'
 
-        const response = await axios.post(baseUrl, credentials)
-        dispatch(addSignedInUser(response.data))
+        try {
+            const response = await axios.post(baseUrl, credentials)
+            dispatch(addSignedInUser(response.data))
 
-
-        window.localStorage.setItem(
-            'loggedBlogsAppUser', JSON.stringify(response.data)
-        )
+            window.localStorage.setItem('loggedBlogsAppUser', JSON.stringify(response.data))
+            dispatch(addBearer(response.data))
+        }
+        catch (error) {
+            console.log('Wrong credentials', error)
+            return error
+        }
     }
 }
 

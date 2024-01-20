@@ -8,10 +8,11 @@ import { getAll } from '../reducers/blogsReducer'
 import Comments from './Comments'
 
 
-const BlogsList = ({ user }) => {
+const BlogsList = () => {
+
     const dispatch = useDispatch()
 
-    let token = useSelector(state => state.sessionUser.convertedToken)
+
 
     useEffect(() => {
         dispatch(getAll(token))
@@ -21,7 +22,8 @@ const BlogsList = ({ user }) => {
 
 
     const blogs = useSelector(state => state.blogs)
-    user = useSelector(state => state.sessionUser)
+
+
 
     const [blogDetailsVisible, setBlogDetailsVisible] = useState(false)
 
@@ -35,6 +37,8 @@ const BlogsList = ({ user }) => {
     //     flexWrap: 'wrap',
     //     width: '50vw',
     // }
+    const token = useSelector(state => state.sessionUser.convertedToken)
+    // if (!token) return null
 
 
 
@@ -48,7 +52,6 @@ const BlogsList = ({ user }) => {
             <div id='blogsListArray'>
                 {blogs.map(blog =>
                     <Blog
-                        user={user}
                         key={blog.id}
                         blog={blog}
                         blogDetailsVisible={blogDetailsVisible}
