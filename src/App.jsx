@@ -38,9 +38,6 @@ const App = () => {
   }, [dispatch])
 
 
-
-
-
   return (
     <Router>
       <NavBar />
