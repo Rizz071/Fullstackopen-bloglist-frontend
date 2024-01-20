@@ -57,7 +57,7 @@ export const getAll = (token) => {
         }
         catch (error) {
             console.log('error occured while fetching users from server', error)
-            if (error.response.status === 401) localStorage.clear()
+            // if (error.response.status === 401) localStorage.clear()
             return error
         }
     }

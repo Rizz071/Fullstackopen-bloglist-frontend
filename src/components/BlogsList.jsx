@@ -13,11 +13,11 @@ const BlogsList = () => {
     const dispatch = useDispatch()
 
 
+    const token = useSelector(state => state.sessionUser.convertedToken)
 
     useEffect(() => {
         dispatch(getAll(token))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [dispatch, token])
 
 
 
@@ -37,28 +37,29 @@ const BlogsList = () => {
     //     flexWrap: 'wrap',
     //     width: '50vw',
     // }
-    const token = useSelector(state => state.sessionUser.convertedToken)
     // if (!token) return null
 
+    if (blogs.length === 0) {
+        return <p>Fetching data from server...</p>
+    } else {
+        return (
+            <>
+                <Togglable buttonLabel='New blog' ref={newBlogFormRef}>
+                    <BlogCreate newBlogFormRef={newBlogFormRef} />
+                </Togglable>
 
-
-    return (
-        <>
-            <Togglable buttonLabel='New blog' ref={newBlogFormRef}>
-                <BlogCreate newBlogFormRef={newBlogFormRef} />
-            </Togglable>
-
-            <h2 style={{ textAlign: 'left', width: '50vw' }}>Blogs in list</h2>
-            <div id='blogsListArray'>
-                {blogs.map(blog =>
-                    <Blog
-                        key={blog.id}
-                        blog={blog}
-                        blogDetailsVisible={blogDetailsVisible}
-                        setBlogDetailsVisible={setBlogDetailsVisible} />)}
-            </div>
-        </>
-    )
+                <h2 style={{ textAlign: 'left', width: '50vw' }}>Blogs in list</h2>
+                <div id='blogsListArray'>
+                    {blogs.map(blog =>
+                        <Blog
+                            key={blog.id}
+                            blog={blog}
+                            blogDetailsVisible={blogDetailsVisible}
+                            setBlogDetailsVisible={setBlogDetailsVisible} />)}
+                </div>
+            </>
+        )
+    }
 }
 
 export default BlogsList

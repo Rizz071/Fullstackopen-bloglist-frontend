@@ -14,15 +14,19 @@ const DetailedUserInfo = () => {
 
     const user = usersArray.find(user => user.id === id)
 
-    return (
-        <div>
-            <h2>{user.name}</h2>
-            <strong>Added blogs</strong>
-            <ul>
-                {user.blogs.map(blog => <li key={Math.round(Math.random() * 10000)}><Link to={`/blogs/${blog.id}`} >{blog.title}</Link></li>)}
-            </ul>
-        </div>
-    )
+    if (!user) {
+        return <p>Fetching data from server...</p>
+    } else {
+        return (
+            <div>
+                <h2>{user.name}</h2>
+                <strong>Added blogs</strong>
+                <ul>
+                    {user.blogs.map(blog => <li key={Math.round(Math.random() * 10000)}><Link to={`/blogs/${blog.id}`} >{blog.title}</Link></li>)}
+                </ul>
+            </div>
+        )
+    }
 }
 
 

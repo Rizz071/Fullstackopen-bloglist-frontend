@@ -18,7 +18,7 @@ const Comments = ({ blog }) => {
 
     useEffect(() => {
         dispatch(getComments(blog))
-    }, [])
+    }, [dispatch, blog])
 
     const handleCreateComment = event => {
         event.preventDefault()
