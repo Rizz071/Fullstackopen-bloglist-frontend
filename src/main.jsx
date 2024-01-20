@@ -8,6 +8,7 @@ import notificationReducer from './reducers/notificationReducer'
 import sessionUserReducer from './reducers/sessionUserReducer'
 import usersListReducer from './reducers/usersListReducer'
 import blogsReducer from './reducers/blogsReducer'
+import commentsReducer from './reducers/commentsReducer'
 
 
 const store = configureStore({
@@ -15,7 +16,8 @@ const store = configureStore({
         notification: notificationReducer,
         sessionUser: sessionUserReducer,
         usersList: usersListReducer,
-        blogs: blogsReducer
+        blogs: blogsReducer,
+        comments: commentsReducer
     }
 })
 

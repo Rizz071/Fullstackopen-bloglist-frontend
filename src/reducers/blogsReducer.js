@@ -32,17 +32,15 @@ const blogsSlice = createSlice({
 })
 
 
-export const { setFetchedBlogs, addBlog, removeBlog, addLikeToBlog } = blogsSlice.actions
+export const { setFetchedBlogs, addBlog, removeBlog, addLikeToBlog, putComment } = blogsSlice.actions
 
 const baseUrl = '/api/blogs'
 
 export const getAll = (token) => {
     return async dispatch => {
         try {
-
-
             const request = await axios.get(baseUrl, { headers: { Authorization: token } })
-
+            // const request = await axios.get(baseUrl)
             request.data.sort((a, b) => {
                 if (a.likes < b.likes) {
                     return 1
@@ -58,7 +56,8 @@ export const getAll = (token) => {
             dispatch(setFetchedBlogs(request.data))
         }
         catch (error) {
-            console.log('error occured while fetching users from server')
+            console.log('error occured while fetching users from server', error)
+            if (error.response.status === 401) localStorage.clear()
         }
     }
 }

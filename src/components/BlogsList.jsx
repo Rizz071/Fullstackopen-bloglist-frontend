@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react'
-// import blogsService from '../services/blogsService'
 import BlogCreate from './BlogCreate'
 import Blog from './Blog'
 import Togglable from './Togglable'
 import { useDispatch, useSelector } from 'react-redux'
 import { showNotification } from '../reducers/notificationReducer'
 import { getAll } from '../reducers/blogsReducer'
+import Comments from './Comments'
 
 
 const BlogsList = ({ user }) => {
@@ -14,19 +14,8 @@ const BlogsList = ({ user }) => {
     let token = useSelector(state => state.sessionUser.convertedToken)
 
     useEffect(() => {
-        // localStorage.clear()
         dispatch(getAll(token))
-
-        // console.log(useSelector(state => state.blogs))
-
-        // blogsService
-        //   .getAll(setUpdateFlag)
-        //   .then(blogs => setBlogs(blogs))
-        //   .catch(error => {
-        //     console.log('error occured during fetching blogs from server')
-        //     console.log(error)
-
-        // localStorage.clear()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -39,17 +28,13 @@ const BlogsList = ({ user }) => {
     const newBlogFormRef = useRef()
 
 
-    const container = {
-        display: 'flex',
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: '50vw',
-        // alignItems: 'stretch'
-        // margin: '0 0 0 0',
-        // position: 'absolute',
-        // top: '10px'
-    }
+    // const container = {
+    //     display: 'flex',
+    //     justifyContent: 'flex-start',
+    //     flexDirection: 'row',
+    //     flexWrap: 'wrap',
+    //     width: '50vw',
+    // }
 
 
 
@@ -59,8 +44,8 @@ const BlogsList = ({ user }) => {
                 <BlogCreate newBlogFormRef={newBlogFormRef} />
             </Togglable>
 
-            <h2 style={{ textAlign: 'center', width: '50vw' }}>Blogs in list</h2>
-            <div id='blogsListArray' style={{ ...container }}>
+            <h2 style={{ textAlign: 'left', width: '50vw' }}>Blogs in list</h2>
+            <div id='blogsListArray'>
                 {blogs.map(blog =>
                     <Blog
                         user={user}
