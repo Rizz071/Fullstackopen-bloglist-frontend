@@ -40,10 +40,10 @@ const App = () => {
 
   return (
     <Router>
-      <NavBar />
+      <NavBar loggedUser={sessionUser} />
       {sessionUser.name && <UserInfo loggedUser={sessionUser} />}
 
-      <h1 style={{ marginTop: '50px' }}>BLOGS Application</h1>
+      <p className='text-3xl'>BLOGS Application</p>
 
       <Notification message={message} />
 

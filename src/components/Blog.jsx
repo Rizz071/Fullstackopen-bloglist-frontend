@@ -68,31 +68,19 @@ const Blog = ({ blog, blogDetailsVisible, setBlogDetailsVisible }) => {
 
 
   return (
-    <div style={item}>
-      <div className='blog-entity'>
-        <span className='blog-title'><strong><Link to={`/blogs/${blog.id}`}>{blog.title}</Link></strong></span><br />
-        <span className='blog-creator'>&nbsp;created by: <Link to={`/users/${blog.user.id}`}>{blog.user.name ? blog.user.name : blog.user.username}</Link></span>
-        {/* <span className='blog-author'>&nbsp;of {blog.author}</span><br /> */}
-        {/* <span className='blog-url'>&nbsp;url: <span style={{ color: 'blue' }}>{blog.url}</span></span><br /> */}
-        {/* <span className='blog-likes'>&nbsp;likes: {blog.likes}</span> <button className='button-likes' style={{ margin: '0 0 0 3px' }} onClick={handleAddLike}>&#128077;</button> <br /><br /> */}
+    <li className="flex justify-between gap-x-6 py-5">
+      <div className="min-w-0 flex-auto">
+        <p className="text-sm font-semibold leading-6 text-gray-900"><Link to={`/blogs/${blog.id}`}>{blog.title}</Link></p>
+        <p className="mt-1 truncate text-xs leading-5 text-gray-500">&nbsp;created by: <Link to={`/users/${blog.user.id}`}>{blog.user.name ? blog.user.name : blog.user.username}</Link></p>
+      </div>
 
-        <br />
-        {/* <button className='buttonView' style={toggleVisibilityButton2} onClick={handleViewDetails}>View</button>
-        <button className='buttonHide' style={toggleVisibilityButton1} onClick={handleViewDetails}>Hide</button> */}
-
-
+      <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
         {user.id === blog.user.id
-          ? <button id='blog-delete-button' style={{ margin: '0 0 0 3px' }} onClick={handleDeleteBlog}> x </button>
+          ? <button type="button" onClick={handleDeleteBlog} className="border px-3 py-1 rounded-lg"> x </button>
           : false
         }
       </div>
-      {/* <div className='blogHidePart' style={toggleVisibilityButton1}> */}
-      {/* <span className='blog-author'>&nbsp;of {blog.author}</span><br />
-        <span className='blog-url'>&nbsp;url: <span style={{ color: 'blue' }}>{blog.url}</span></span><br />
-        <span className='blog-likes'>&nbsp;likes: {blog.likes}</span> <button className='button-likes' style={{ margin: '0 0 0 3px' }} onClick={handleAddLike}>&#128077;</button> <br /><br />
-        <span className='blog-creator'>&nbsp;created by: {blog.user.username}</span> */}
-      {/* </div> */}
-    </div >
+    </li>
   )
 }
 

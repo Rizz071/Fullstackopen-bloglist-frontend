@@ -30,7 +30,7 @@ const UserInfo = ({ loggedUser }) => {
         return (
             <div style={inline_style} >
                 <span><strong>{loggedUser.name}</strong> logged in&nbsp;</span>
-                <button onClick={handleLogout}> Logout </button>
+                <button type='button' className='rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50' onClick={handleLogout}> Logout </button>
             </div >
         )
     }

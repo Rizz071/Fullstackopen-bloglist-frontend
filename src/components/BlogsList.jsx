@@ -29,35 +29,25 @@ const BlogsList = () => {
 
     const newBlogFormRef = useRef()
 
-
-    // const container = {
-    //     display: 'flex',
-    //     justifyContent: 'flex-start',
-    //     flexDirection: 'row',
-    //     flexWrap: 'wrap',
-    //     width: '50vw',
-    // }
-    // if (!token) return null
-
     if (blogs.length === 0) {
         return <p>Fetching data from server...</p>
     } else {
         return (
-            <>
+            <div className='flex flex-col max-w-xl m-auto'>
                 <Togglable buttonLabel='New blog' ref={newBlogFormRef}>
                     <BlogCreate newBlogFormRef={newBlogFormRef} />
                 </Togglable>
 
-                <h2 style={{ textAlign: 'left', width: '50vw' }}>Blogs in list</h2>
-                <div id='blogsListArray'>
+                <p className="text-2xl">Blogs in list</p>
+                <ul role="list" className="divide-y divide-gray-100">
                     {blogs.map(blog =>
                         <Blog
                             key={blog.id}
                             blog={blog}
                             blogDetailsVisible={blogDetailsVisible}
                             setBlogDetailsVisible={setBlogDetailsVisible} />)}
-                </div>
-            </>
+                </ul>
+            </div>
         )
     }
 }
